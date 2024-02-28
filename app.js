@@ -43,6 +43,10 @@ ResetPassword.belongsTo(User);
 User.hasMany(Report);
 Report.belongsTo(User);
 
+app.use("/homepage", routes);
+app.use("/homepage", (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
 
 app.use((req, res, next) => {
     res.setHeader(
@@ -53,10 +57,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use("/homepage", routes);
-app.use("/homepage", (req, res, next) => {
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
-});
+
 app.use("/user", routes );
 app.use("/payment", routes);
 app.use('/premium', routes);
