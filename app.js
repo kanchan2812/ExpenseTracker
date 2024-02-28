@@ -54,9 +54,9 @@ app.use((req, res, next) => {
 });
 
 app.use("/homepage", routes);
-//app.use("/homepage", (req, res, next) => {
-   // res.sendFile(path.join(__dirname, 'views', 'index.html'));
-//});
+app.use("/homepage", (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
 app.use("/user", routes );
 app.use("/payment", routes);
 app.use('/premium', routes);
