@@ -44,13 +44,11 @@ User.hasMany(Report);
 Report.belongsTo(User);
 
 app.use("/homepage", routes);
-app.use("/homepage", (req, res, next) => {
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
-});
+app.use("/homepage", express.static(path.join(__dirname, 'views')));
+
 
 app.use((req, res, next) => {
     res.setHeader(
-      'Content-Security-Policy',
       "script-src 'self' https://checkout.razorpay.com; " +
       "script-src-elem 'self' https://checkout.razorpay.com;"
     );
@@ -65,9 +63,7 @@ app.get("/password/resetPassword/:uniqueId", (req, res, next)=> {
     res.sendFile(path.join(__dirname, 'views', 'resetPassword.html'));
 } );
 
-app.use("/", (req, res, next) => {
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
-});
+
 
 sequelize.sync()
     .then( res => {
